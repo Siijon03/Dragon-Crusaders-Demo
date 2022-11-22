@@ -8,7 +8,11 @@ public class Grid_Manager : MonoBehaviour
     //or object states into a format that Unity can store and reconstruct later.
     [SerializeField] private int _width, _height;
 
+    [SerializeField] private Transform _camera;
+
     public Tile _tilePrefab;
+
+    private Dictionary<Vector2, Tile> _tiles;
 
     private void Start()
     {
@@ -30,6 +34,18 @@ public class Grid_Manager : MonoBehaviour
             }
         }
 
+        _camera.transform.position = new Vector3((float)_width/2 -0.5f - 1 ,(float)_height / 2 - 3.5f, - 10);
+
         Destroy(gameObject);
+    }
+
+    public Tile GetTileAtPosition(Vector2 pos)
+    {
+        if (_tiles.TryGetValue(pos, out var tile))
+        {
+            return tile;
+        }
+
+        return null;
     }
 }
