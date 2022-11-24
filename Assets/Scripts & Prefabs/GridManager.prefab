@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 18417446307018615}
   - component: {fileID: 8036013832832364353}
-  - component: {fileID: -30213127103003124}
   m_Layer: 0
   m_Name: GridManager
   m_TagString: Untagged
@@ -45,21 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57b1ac3de9f907a4e8b1b1635393c27f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _width: 0
-  _height: 0
-  _tilePrefab: {fileID: 0}
---- !u!114 &-30213127103003124
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6011062687138696661}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57b1ac3de9f907a4e8b1b1635393c27f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _width: 0
-  _height: 0
+  Grid_Row: 3
+  Grid_Columns: 3
+  Grid_Tile_Size: 1
+  _camera: {fileID: 0}
   _tilePrefab: {fileID: 0}

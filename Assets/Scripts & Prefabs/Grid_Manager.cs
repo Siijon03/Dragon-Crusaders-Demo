@@ -6,7 +6,11 @@ public class Grid_Manager : MonoBehaviour
 {
     //Serialization is the automatic process of transforming data structures
     //or object states into a format that Unity can store and reconstruct later.
-    [SerializeField] private int _width, _height;
+    [SerializeField] private int Grid_Row = 3;
+
+    [SerializeField] private int Grid_Columns = 3;
+
+    [SerializeField] private int Grid_Tile_Size = 1;
 
     [SerializeField] private Transform _camera;
 
@@ -21,20 +25,26 @@ public class Grid_Manager : MonoBehaviour
 
     void GenerateGrid()
     {
+        GameObject referenceTile = (GameObject)Instantiate(Resources.Load("Game Tile"));
+
         //Sets the Width of the Grid
-        for (int x = 0; x < 3; x++)
+        for (int x = 0; x < Grid_Row; x++)
         {
             //Sets the Height of the Grid
-            for (int y = 0; y < 3; y++)
+            for (int y = 0; y < Grid_Columns; y++)
             {
-                //Instantiate that allows you to spawn new objects in the scene. Vector 3 represents 3D vectors and points. 
-                //"Quaternion. identity" is the "default" or none value to the objects rotation. By setting the rotation of the new object to this value it ensures that the new object will be in it's "natural" orientation.
-                var spawnedTile = Instantiate(_tilePrefab, new Vector3(x, y), Quaternion.identity);
-                spawnedTile.name = $"Tile{x}{y}";
+                GameObject tile = (GameObject)Instantiate(referenceTile, transform);
+
+                float posX = Grid_Columns * Grid_Tile_Size;
+                float posY = Grid_Row * -Grid_Tile_Size;
+
+                tile.transform.position = new Vector2(posX, posY);
             }
         }
 
-        _camera.transform.position = new Vector3((float)_width/2 -0.5f - 1 ,(float)_height / 2 - 3.5f, - 10);
+        Destroy(referenceTile);
+
+        //_camera.transform.position = new Vector3((float)_width/2 -0.5f - 1 ,(float)_height / 2 - 3.5f, - 10);
 
         Destroy(gameObject);
     }
@@ -49,3 +59,4 @@ public class Grid_Manager : MonoBehaviour
         return null;
     }
 }
+https://www.youtube.com/watch?v=u2_O-jQDD6s
