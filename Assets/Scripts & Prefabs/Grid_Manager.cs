@@ -49,11 +49,13 @@ public class Grid_Manager : MonoBehaviour
                 float posY = x * -Grid_Tile_Size;
 
                 //Moves the tiles into those spaces
-                tile.transform.position = new Vector2(posX, posY);
+                tile.transform.position = new Vector2(gameObject.transform.position.x + posX, gameObject.transform.position.y + posY);
             }
         }
 
-       
+        float GridW = Grid_Columns * Grid_Tile_Size;
+        float GridH = Grid_Row * Grid_Tile_Size;
+        //transform.position = new Vector2((-GridW / 2) - 8 + Grid_Tile_Size / 2, (GridH / 2) - 1 - Grid_Tile_Size / 2);
 
        
         
