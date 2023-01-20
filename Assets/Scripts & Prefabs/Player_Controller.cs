@@ -9,6 +9,7 @@ public class Player_Controller : MonoBehaviour
     public float x = 0f;
     public float y = 0f;
 
+
     //This stores the coordinates 
     //By making this public, we can send it to start and then pass it to public.
     public Vector3 Start_Position = new Vector3(0,0,0);

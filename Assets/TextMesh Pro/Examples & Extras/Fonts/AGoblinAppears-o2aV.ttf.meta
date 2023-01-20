@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: c989b724cb8e57d45bb491c01cc6502c
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - A Goblin Appears!
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 55b146e24effb40488f3bcba342d484a, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
