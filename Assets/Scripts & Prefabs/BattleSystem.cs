@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 
 //Setting up the BattleConditions to include possible outcomes. 
-public enum BattleState { START, PLAYERTURN, EMEMYTURN, WIN, LOSE, FLEE}
+public enum BattleState { START, PLAYERTURN, ATTACKING,ITEM,ACT,SELECTION,EMEMYTURN, WIN, LOSE, FLEE}
 
 public class BattleSystem : MonoBehaviour
 {
@@ -22,6 +22,10 @@ public class BattleSystem : MonoBehaviour
 
     //Sets Up UIText
     public TextMeshProUGUI UIDialogueText;
+    public TextMeshProUGUI UIEnemyLevel;
+
+    public TextMeshProUGUI UIPlayerName;
+    public TextMeshProUGUI UIPlayerLevel;
 
     //Public BattleState Adjsutment
     public BattleState state;
@@ -39,12 +43,16 @@ public class BattleSystem : MonoBehaviour
         GameObject PlayerTurn = Instantiate(PlayerPrefab, PlayerBattleStation);
         PlayerUnit = PlayerTurn.GetComponent<Player>();
 
+        UIPlayerName.text = PlayerUnit.MC_Name;
+        UIPlayerLevel.text = "Lv." + PlayerUnit.PlayerLevel;
+
         GameObject EnemyTurn = Instantiate(EnemyPrefab, EnemyBattleStation);  
         EnemyUnit = EnemyTurn.GetComponent<Enemy_Unit>();
 
-        UIDialogueText.text = "A " + EnemyUnit.EnemyName + " Appears!";
-        
-         
+        UIDialogueText.text = EnemyUnit.EnemyName;
+        UIEnemyLevel.text = "Lv." + EnemyUnit.EnemyLevel;
+
+
     }
 
 }

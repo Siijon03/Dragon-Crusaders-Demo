@@ -9,6 +9,7 @@ public class Enemy_Position : MonoBehaviour
     public float x = 0f;
     public float y = 0f;
 
+  
 
     //This stores the coordinates 
     //By making this public, we can send it to start and then pass it to public.
@@ -25,10 +26,10 @@ public class Enemy_Position : MonoBehaviour
             //This accesses our grid manager script and Creates a new variable 
             GameObject GridObject = GameObject.Find("Enemy_GridManager");
             //This accesses our grid manager script and calls upon those functions
-            Grid_Manager GridScript = GridObject.GetComponent<Grid_Manager>();
+            Enemy_GridManager GridScript = GridObject.GetComponent<Enemy_GridManager>();
             //Gets the values of the rows and columns 
-            y = GridScript.Grid_Row;
-            x = GridScript.Grid_Columns;
+            y = GridScript.E_Grid_Row;
+            x = GridScript.E_Grid_Columns;
 
             //Rounds off the numbers 
             //We need 'new' values so it doesn't conflict with the old ones.
@@ -38,7 +39,7 @@ public class Enemy_Position : MonoBehaviour
 
             //This makes it so the player will spawn in the middle by adjusting those co-ordinates 
             gameObject.transform.position = new Vector2(GridObject.transform.position.x + (new_x - 1), GridObject.transform.position.y + ((new_y * -1) + 1));
-            //Store player position as local co-ordinates
+            //Store enemy position as local co-ordinates
             Enemy_Placement = new Vector2(new_x, new_y);
             //This stores the starting position. 
             Start_Position = gameObject.transform.position;

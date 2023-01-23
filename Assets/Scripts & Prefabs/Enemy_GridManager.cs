@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy_Grid_Manager : MonoBehaviour
+public class Enemy_GridManager : MonoBehaviour
 {
     //Serialization is the automatic process of transforming data structures
     //or object states into a format that Unity can store and reconstruct later.
@@ -16,7 +16,7 @@ public class Enemy_Grid_Manager : MonoBehaviour
 
     [SerializeField] private Transform _camera;
 
-    public GameObject _EtilePrefab;
+    public GameObject _E_tilePrefab;
 
 
 
@@ -40,7 +40,7 @@ public class Enemy_Grid_Manager : MonoBehaviour
             for (int y = 0; y < E_Grid_Columns; y++)
             {
                 //This Generates and calls the tile prefab so it can be transformed
-                GameObject tile = (GameObject)Instantiate(_EtilePrefab, transform);
+                GameObject tile = (GameObject)Instantiate(_E_tilePrefab, transform);
                 //Checking if tiles were actually made
                 Debug.Log("Enemy Tile Made");
 
