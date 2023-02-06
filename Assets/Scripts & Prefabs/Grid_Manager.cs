@@ -31,8 +31,7 @@ public class Grid_Manager : MonoBehaviour
 
     void GenerateGrid()
     {
-        //GameObject referenceTile = (GameObject)Instantiate(Resources.Load("Game Tile"));
-
+       
         //Sets the Width of the Grid
         for (int x = 0; x < Grid_Row; x++)
         {
@@ -55,11 +54,7 @@ public class Grid_Manager : MonoBehaviour
 
         float GridW = Grid_Columns * Grid_Tile_Size;
         float GridH = Grid_Row * Grid_Tile_Size;
-        //transform.position = new Vector2((-GridW / 2) - 8 + Grid_Tile_Size / 2, (GridH / 2) - 1 - Grid_Tile_Size / 2);
-
-       
-        
-
+  
         //Instamtiate player to move a fixed number so it looks like they're in the tiles 
         //Enemy attacks space of tile 
     }

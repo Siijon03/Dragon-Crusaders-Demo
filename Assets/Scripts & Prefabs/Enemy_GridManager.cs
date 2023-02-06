@@ -31,7 +31,6 @@ public class Enemy_GridManager : MonoBehaviour
 
     void E_GenerateGrid()
     {
-        //GameObject referenceTile = (GameObject)Instantiate(Resources.Load("Game Tile"));
 
         //Sets the Width of the Grid
         for (int x = 0; x < E_Grid_Row; x++)
@@ -55,13 +54,7 @@ public class Enemy_GridManager : MonoBehaviour
 
         float GridW = E_Grid_Columns * E_Grid_Tile_Size;
         float GridH = E_Grid_Row * E_Grid_Tile_Size;
-        //transform.position = new Vector2((-GridW / 2) - 8 + Grid_Tile_Size / 2, (GridH / 2) - 1 - Grid_Tile_Size / 2);
-
-
-
-
-        //Instamtiate player to move a fixed number so it looks like they're in the tiles 
-        //Enemy attacks space of tile 
+        
     }
 }
 //https://www.youtube.com/watch?v=u2_O-jQDD6s

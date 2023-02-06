@@ -1276,6 +1276,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 850167451}
     m_Modifications:
+    - target: {fileID: 2070225548701936842, guid: 09adabe15a72b92489d84078c29b8266, type: 3}
+      propertyPath: m_Name
+      value: PlayerHealth
+      objectReference: {fileID: 0}
     - target: {fileID: 2070225548701936845, guid: 09adabe15a72b92489d84078c29b8266, type: 3}
       propertyPath: m_SizeDelta.x
       value: 170
@@ -1295,6 +1299,10 @@ PrefabInstance:
     - target: {fileID: 2070225548728798315, guid: 09adabe15a72b92489d84078c29b8266, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2070225549084216876, guid: 09adabe15a72b92489d84078c29b8266, type: 3}
+      propertyPath: m_Name
+      value: PlayerEXP
       objectReference: {fileID: 0}
     - target: {fileID: 2070225549084216879, guid: 09adabe15a72b92489d84078c29b8266, type: 3}
       propertyPath: m_SizeDelta.y
@@ -1339,6 +1347,10 @@ PrefabInstance:
     - target: {fileID: 2070225549493447613, guid: 09adabe15a72b92489d84078c29b8266, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2070225549690763064, guid: 09adabe15a72b92489d84078c29b8266, type: 3}
+      propertyPath: m_Name
+      value: PlayerEnergy
       objectReference: {fileID: 0}
     - target: {fileID: 2070225549690763067, guid: 09adabe15a72b92489d84078c29b8266, type: 3}
       propertyPath: m_SizeDelta.x

@@ -20,12 +20,17 @@ public class BattleSystem : MonoBehaviour
     Player PlayerUnit;
     Enemy_Unit EnemyUnit;
 
-    //Sets Up UIText
+    //Sets Up UIText that can be called in game for the enemy.
     public TextMeshProUGUI UIDialogueText;
     public TextMeshProUGUI UIEnemyLevel;
 
+    //Sets Up UIText that can be called in game for the player.
     public TextMeshProUGUI UIPlayerName;
     public TextMeshProUGUI UIPlayerLevel;
+
+    //This calls our BattleHUD script so it can be used here. 
+    public BattleHUD PlayerSide;
+    public BattleHUD EnemySide;
 
     //Public BattleState Adjsutment
     public BattleState state;
@@ -51,6 +56,9 @@ public class BattleSystem : MonoBehaviour
 
         UIDialogueText.text = EnemyUnit.EnemyName;
         UIEnemyLevel.text = "Lv." + EnemyUnit.EnemyLevel;
+
+        PlayerSide.SetHUD(PlayerUnit);
+        EnemySide.SetHUD(EnemyUnit);
 
 
     }
