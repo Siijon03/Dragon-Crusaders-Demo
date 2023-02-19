@@ -18,11 +18,13 @@ public class BattleHUD : MonoBehaviour
 
     public Slider EnemyHealth;
 
+    //https://www.youtube.com/watch?v=0tDPxNB2JNs This can be used for our, health, energy and EXP. S
+
     //P_Unit means player unit.
     //E_Unit means enemy unit.
     //Setting the HUD by calling values from our player script. 
     //Additionally setting the HUD on the player side. 
-    public void SetHUD(Player P_Unit,Enemy_Unit E_Unit)
+    public void SetPHUD(Player P_Unit)
     {   
         //This Sets the Player's MaxHealth and Current Health.
         PlayerHealth.maxValue = P_Unit.Player_MaxHealth;
@@ -36,6 +38,11 @@ public class BattleHUD : MonoBehaviour
         PlayerEXP.maxValue = P_Unit.Player_LvUp;
         PlayerEXP.value = P_Unit.Player_CurrentLevel;
 
+    }
+
+    public void SetEHUD(Enemy_Unit E_Unit)
+    {
+     
         //This Sets the Enemy's MaxHealth and MinimumHealth.
         EnemyHealth.maxValue = E_Unit.Enemy_MaxHealth;
         EnemyHealth.value = E_Unit.Enemy_CurrentHealth;
