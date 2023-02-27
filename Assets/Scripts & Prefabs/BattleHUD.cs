@@ -18,7 +18,8 @@ public class BattleHUD : MonoBehaviour
 
     public Slider EnemyHealth;
 
-    //https://www.youtube.com/watch?v=0tDPxNB2JNs This can be used for our, health, energy and EXP. S
+    //https://www.youtube.com/watch?v=0tDPxNB2JNs This can be used for our, health, energy and EXP.
+    //For this, import your player stats for the correct values by gamecompenent find.
 
     //P_Unit means player unit.
     //E_Unit means enemy unit.

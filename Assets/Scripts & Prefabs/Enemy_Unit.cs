@@ -21,5 +21,17 @@ public class Enemy_Unit : MonoBehaviour
     //This is the Enemy's chance to evade a player's attack.
     public int Enemy_DodgeStat;
 
+    //This how much damage an enemy can deal.
+    public int Enemy_Damage;
+
+    public bool TakeDamage(int TakeDamage)
+    {
+        Enemy_CurrentHealth -= TakeDamage;
+
+        if (Enemy_CurrentHealth <= 0)
+            return true;
+        else
+            return false;
+    }
 
 }

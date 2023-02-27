@@ -26,5 +26,21 @@ public class Player : MonoBehaviour
     public int PlayerLevel;
     public int Player_LvUp;
     public int Player_CurrentLevel;
+
+    //This is how much damage the player can deal.
+    public int Player_Damage;
+
+    //This is for when the player takes damage 
+    public bool TakeDamage(int TakeDamage)
+    {
+        //When Damage is taken this will subtract the player's health.
+        Player_CurrentHealth -= TakeDamage;
+
+        //Checks if the Player's current health is equal or below 0.
+        if (Player_CurrentHealth <= 0)
+            return true;
+        else
+            return false;
+    }
     
 }
