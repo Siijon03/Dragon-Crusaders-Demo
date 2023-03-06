@@ -68,12 +68,14 @@ public class BattleSystem : MonoBehaviour
         state = BattleState.PLAYERTURN;
         //Loads PlayerTurn
         Player_Turn();
+        Debug.Log("Switching to Player");
     }
 
     //This indicates playerturn
     void Player_Turn()
     {
         UIDialogueText.text = EnemyUnit.EnemyName + "As Appeared... Take them down!";
+        Debug.Log("Your Turn!");
     }
 
     //Switches to the Player Attack
@@ -102,6 +104,7 @@ public class BattleSystem : MonoBehaviour
         {
             //Flavour Text.
             UIDialogueText.text = EnemyUnit.EnemyName + "Attacks!";
+            Debug.Log("Enemy Attacks");
 
             yield return new WaitForSeconds(1f);
 
@@ -109,7 +112,7 @@ public class BattleSystem : MonoBehaviour
             PlayerUnit.TakeDamage(EnemyUnit.Enemy_Damage);
 
             //Updates Player HP.
-            PlayerHUD.SetHP(PlayerUnit.Player_CurrentHealth);
+            PlayerHUD.SetHP(PlayerUnit.Player_CurrentHealth); 
 
             yield return new WaitForSeconds(1f);
 
@@ -118,12 +121,14 @@ public class BattleSystem : MonoBehaviour
             {
                 state = BattleState.LOSE;
                 EndBattle();
+                Debug.Log("End of Battle....you lose...");
             }
             //Switches back to player turn
             else
             {
                 state = BattleState.PLAYERTURN;
                 Player_Turn();
+                Debug.Log("Back To You!");
             }
         }
 
@@ -132,11 +137,13 @@ public class BattleSystem : MonoBehaviour
         {
             if(state == BattleState.WIN)
             {
-                UIDialogueText.text = PlayerUnit.MC_Name + "Wins!";
+                UIDialogueText.text = PlayerUnit.MC_Name + " Wins!";
+                Debug.Log("You Won!");
             }
             else if (state == BattleState.LOSE)
             {
-                UIDialogueText.text = PlayerUnit.MC_Name + "Loses...";
+                UIDialogueText.text = PlayerUnit.MC_Name + " Loses...";
+                Debug.Log("You Lose...");
             }
         }
     }
