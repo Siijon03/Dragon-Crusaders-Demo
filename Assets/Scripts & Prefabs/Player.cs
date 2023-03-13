@@ -24,7 +24,7 @@ public class Player : MonoBehaviour
 
     //Player Levelup multipliers, Lv is the current level while LvUp is how much they need to level up. Also, CurLvl is how much exp they currently have. 
     public int PlayerLevel;
-    public int Player_LvUp;
+    public int Player_ExperienceAmount;
     public int Player_CurrentLevel;
 
     //This is how much damage the player can deal.
@@ -34,7 +34,7 @@ public class Player : MonoBehaviour
     public bool TakeDamage(int TakeDamage)
     {
         //When Damage is taken this will subtract the player's health.
-        Player_CurrentHealth -= TakeDamage;
+        Player_CurrentHealth -= ((TakeDamage * 2)/Player_DefenseStat);
 
         //Checks if the Player's current health is equal or below 0.
         if (Player_CurrentHealth <= 0)
