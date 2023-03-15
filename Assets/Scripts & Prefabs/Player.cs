@@ -25,10 +25,8 @@ public class Player : MonoBehaviour
     //Player Levelup multipliers, Lv is the current level while LvUp is how much they need to level up. Also, CurLvl is how much exp they currently have. 
     public int PlayerLevel;
     public int Player_ExperienceAmount;
+    public int EXPNeeded;
     public int Player_CurrentLevel;
-
-    //This is how much damage the player can deal.
-    public int Player_Damage;
 
     //This is for when the player takes damage 
     public bool TakeDamage(int TakeDamage)
@@ -38,9 +36,46 @@ public class Player : MonoBehaviour
 
         //Checks if the Player's current health is equal or below 0.
         if (Player_CurrentHealth <= 0)
+            //Returns true if yes
+            return true;
+        else
+            //Returns False if not
+            return false;
+    }
+
+    //This Decreases Energy Based on Amount of Energy/Mana Used for an Attack.
+    public bool UseEnergy(int UseEnergy)
+    {
+        //Checks if Decreases the amount of energy used by the amount of energy used.
+        Player_CurrentEnergy -= UseEnergy;
+
+        //Checks if Current Energy is equal of below Zer0.
+        if (Player_CurrentEnergy <= 0)
+            //If yes then the player cannot use an energy attack.
+            return true;
+        else
+            //If not, they can use another energy attack.
+            return false;
+    }
+
+    public bool GainExperiencePoints(int GainEXP)
+    {
+
+        Player_ExperienceAmount += GainEXP;
+
+        if (Player_ExperienceAmount >= EXPNeeded)
             return true;
         else
             return false;
+            
+    }
+
+    public void PlayerHeal(int HealAmount)
+    {
+        HealAmount = ((Player_MaxHealth / 100) * 25);
+        Player_CurrentHealth += HealAmount;
+        if (Player_CurrentHealth > Player_MaxHealth)
+            Player_CurrentHealth = Player_MaxHealth;
     }
     
 }

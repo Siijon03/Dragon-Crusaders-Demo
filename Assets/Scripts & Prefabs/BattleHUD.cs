@@ -36,8 +36,8 @@ public class BattleHUD : MonoBehaviour
         PlayerEnergy.value = P_Unit.Player_CurrentEnergy;
 
         //This Sets the Player's MaxEXP to level up and Current EXP.
-        PlayerEXP.maxValue = P_Unit.Player_ExperienceAmount;
-        PlayerEXP.value = P_Unit.Player_CurrentLevel;
+        PlayerEXP.maxValue = P_Unit.EXPNeeded;
+        PlayerEXP.value = P_Unit.Player_ExperienceAmount;
 
     }
 
@@ -51,7 +51,7 @@ public class BattleHUD : MonoBehaviour
     }
 
     //This Updates the player's health meter on damage or restoration.
-    public void SetHP(int HealthUpdate)
+    public void SetPlayerHP(int HealthUpdate)
     {
         PlayerHealth.value = HealthUpdate;
     }
@@ -65,7 +65,7 @@ public class BattleHUD : MonoBehaviour
     //This Updates the player's EXP whenever they gain EXP.
     public void SetEXP(int EXPUpdate)
     {
-        PlayerEnergy.value = EXPUpdate;
+        PlayerEXP.value = EXPUpdate;
     }
 
     public void SetEnemyHP(int EnemyHPUpdate)
