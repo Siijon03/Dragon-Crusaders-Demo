@@ -41,6 +41,7 @@ public class BattleHUD : MonoBehaviour
 
     }
 
+    //Establishes and Retrives the Health Values.
     public void SetEHUD(Enemy_Unit E_Unit)
     {
      
@@ -68,6 +69,7 @@ public class BattleHUD : MonoBehaviour
         PlayerEXP.value = EXPUpdate;
     }
 
+    //This Updates the Enemy's HP whenever the Value Changes. 
     public void SetEnemyHP(int EnemyHPUpdate)
     {
         EnemyHealth.value = EnemyHPUpdate;

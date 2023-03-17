@@ -22,11 +22,13 @@ public class Enemy_Unit : MonoBehaviour
     public int Enemy_DodgeStat;
 
     
-
+    //This is for when the enemy takes damage.
     public bool TakeDamage(int TakeDamage)
     {
+        //Subtracting from the Enemy's health using a basic damage formula.
         Enemy_CurrentHealth -= ((TakeDamage * 2) / Enemy_DefenseStat);
 
+        //Checks if the Enemy's Current Health is Below or Equal to Zero.
         if (Enemy_CurrentHealth <= 0)
             return true;
         else

@@ -94,8 +94,6 @@ public class BattleSystem : MonoBehaviour
     //Switches to the Player Attack
     IEnumerator PlayerAttack()
     {
-        //Checks to see if player has dropped to 0 HP.
-        bool PlayerisDead = PlayerUnit.TakeDamage(EnemyUnit.Enemy_AttackStat);
         //Checks to see if enemy has dropped to 0 HP.
         bool EnemyIsDead = EnemyUnit.TakeDamage(PlayerUnit.Player_AttackStat);
 
@@ -106,20 +104,6 @@ public class BattleSystem : MonoBehaviour
         
         yield return new WaitForSeconds(2f);
 
-        //Checks if player is defeated.
-        if (PlayerisDead == true)
-        {
-            CurrentState = BattleState.LOSE;
-            EndBattle();
-            Debug.Log("End of Battle....you lose...");
-        }
-        //Switches back to player turn
-        else
-        {
-            CurrentState = BattleState.PLAYERTURN;
-            Player_Turn();
-            Debug.Log("Back To You!");
-        }
 
         //If enemy is dead then the player wins and the battle ends. 
         if (EnemyIsDead == true)
@@ -136,20 +120,7 @@ public class BattleSystem : MonoBehaviour
             StartCoroutine(EnemyTurn());
         }
 
-        //Loads ending the battle depending on the result.
-        void EndBattle()
-        {
-            if(CurrentState == BattleState.WIN)
-            {
-                UIDialogueText.text = PlayerUnit.MC_Name + " Wins!";
-                Debug.Log("You Won!");
-            }
-            else if (CurrentState == BattleState.LOSE)
-            {
-                UIDialogueText.text = PlayerUnit.MC_Name + " Loses...";
-                Debug.Log("You Lose...");
-            }
-        }
+        
     }
 
     //This is the enemy's turn
@@ -168,20 +139,88 @@ public class BattleSystem : MonoBehaviour
         //Updates Player HP.
         PlayerHUD.SetPlayerHP(PlayerUnit.Player_CurrentHealth);
 
+        //Checks to see if player has dropped to 0 HP.
+        bool PlayerisDead = PlayerUnit.TakeDamage(EnemyUnit.Enemy_AttackStat);
+
+        //Checks if player is defeated.
+        if (PlayerisDead == true)
+        {
+            CurrentState = BattleState.LOSE;
+            EndBattle();
+            Debug.Log("End of Battle....you lose...");
+        }
+        else
+        {
+            CurrentState = BattleState.PLAYERTURN;
+            Player_Turn();
+            Debug.Log("Switching back to Player!");
+        }
 
         yield return new WaitForSeconds(1f);
 
+        Player_Turn();
+    }
+
+    //Loads ending the battle depending on the result.
+    void EndBattle()
+    {
+        if (CurrentState == BattleState.WIN)
+        {
+            //Displays A winning message.
+            UIDialogueText.text = PlayerUnit.MC_Name + " Wins!";
+            //Loops the function as to not load another state.
+            EndBattle();
+            Debug.Log("You Won!");
+        }
+        else if (CurrentState == BattleState.LOSE)
+        {
+            //Displays A losing message.  
+            UIDialogueText.text = PlayerUnit.MC_Name + " Loses...";
+            //Loops the function as to not load another state.
+            EndBattle();
+            Debug.Log("You Lose...");
+        }
+        else if (CurrentState == BattleState.FLEE)
+        {
+            //Displays A losing message.  
+            UIDialogueText.text = PlayerUnit.MC_Name + " Flees...";
+            //Loops the function as to not load another state.
+            EndBattle();
+            Debug.Log("You Escaped...");
+        }
     }
 
     IEnumerator ITEM()
     {
-        PlayerUnit.PlayerHeal(25);
+        //Called From our Player Script 
+        PlayerUnit.PlayerHeal(50);
 
+        //Updates Health bar on the HUD by a number
         PlayerHUD.SetPlayerHP(PlayerUnit.Player_CurrentHealth);
+        //Displays Dialouge Text
         UIDialogueText.text = PlayerUnit.MC_Name + "Heals!";
         yield return new WaitForSeconds(2f);
 
+        //Switches Back to the Enemy's Turn
         CurrentState = BattleState.ENEMYTURN;
+        //Starts the Process
+        StartCoroutine(EnemyTurn());
+    }
+
+    IEnumerator FLEE()
+    {
+        yield return new WaitForSeconds(2f);
+        CurrentState = BattleState.FLEE;
+    }
+
+    IEnumerator ACT()
+    {
+        yield return new WaitForSeconds(2f);
+        Debug.Log("Act Successful!");
+
+        //Switches Back to the Enemy's Turn
+        CurrentState = BattleState.ENEMYTURN;
+        //Starts the Process
         StartCoroutine(EnemyTurn());
     }
 
@@ -198,11 +237,30 @@ public class BattleSystem : MonoBehaviour
 
     public void OnItemButton()
     {
-        //This Will Heal the Player
+        //This Will Heal the Player when clicked. 
         if (CurrentState != BattleState.PLAYERTURN)
         return;
         StartCoroutine(ITEM());
         UIDialogueText.text = PlayerUnit.MC_Name + " Heals!";
+        Debug.Log("Successful Heal!");
+    }
+
+    public void OnFleeButton()
+    {
+        if (CurrentState != BattleState.PLAYERTURN)
+        return;
+        StartCoroutine(FLEE());
+        UIDialogueText.text = PlayerUnit.MC_Name + " Has Escaped!";
+        Debug.Log("You escaped the battle!");
+    }
+
+    public void OnActButton()
+    {
+        //This Will Heal the Player when clicked. 
+        if (CurrentState != BattleState.PLAYERTURN)
+            return;
+        StartCoroutine(ACT());
+        UIDialogueText.text = EnemyUnit.EnemyName + " ... " + EnemyUnit.Enemy_CurrentHealth + " HP out of " + EnemyUnit.Enemy_MaxHealth + " HP Left!" ;
         Debug.Log("Successful Heal!");
     }
 

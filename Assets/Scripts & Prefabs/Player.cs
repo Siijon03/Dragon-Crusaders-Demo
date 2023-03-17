@@ -58,6 +58,7 @@ public class Player : MonoBehaviour
             return false;
     }
 
+    //This will give the Player Experience Points Based on the amount of EXP an Enemy Contains.
     public bool GainExperiencePoints(int GainEXP)
     {
 
@@ -70,10 +71,12 @@ public class Player : MonoBehaviour
             
     }
 
+    //Allows the Player to Heal when taken damage.
     public void PlayerHeal(int HealAmount)
-    {
-        HealAmount = ((Player_MaxHealth / 100) * 25);
+    { 
+        //Adds A healing amount to the Player's Current Health.
         Player_CurrentHealth += HealAmount;
+        //Stops the Player from 'Overhealing.'
         if (Player_CurrentHealth > Player_MaxHealth)
             Player_CurrentHealth = Player_MaxHealth;
     }
