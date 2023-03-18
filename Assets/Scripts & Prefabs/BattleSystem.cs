@@ -12,7 +12,7 @@ public class BattleSystem : MonoBehaviour
     public GameObject PlayerPrefab;
     public GameObject EnemyPrefab;
 
-    //Detrimes the 'BattleStations' of the Player and Enemy. 
+    //Determines the 'BattleStations' of the Player and Enemy. 
     public Transform PlayerBattleStation;
     public Transform EnemyBattleStation;
 
@@ -32,24 +32,23 @@ public class BattleSystem : MonoBehaviour
     public BattleHUD PlayerHUD;
     public BattleHUD EnemyHUD;
 
-    //Public BattleState Adjsutment
+    //Public BattleState Adjustment.
     public BattleState CurrentState;
 
-    
-
-
-
-    //Sets the battle set to start and battles upon the SetBattle Function
+    //Sets the battle set to start and battles upon the SetBattle Function.
     void Start()
     {
+        //Makes the Inital State Start.
         CurrentState = BattleState.START;
         StartCoroutine(SetupBattle());
     }
 
-    //Sets up the Battle and Gets the Enemyname
+    //Sets up the Battle and Gets the Enemyname.
     IEnumerator SetupBattle()
     {
+        //Clones the Prefab and Grid.
         GameObject PlayerTurn = Instantiate(PlayerPrefab, PlayerBattleStation);
+        //Gets Components of the Player GameObject.
         PlayerUnit = PlayerTurn.GetComponent<Player>();
 
         UIPlayerName.text = PlayerUnit.MC_Name;
@@ -149,6 +148,7 @@ public class BattleSystem : MonoBehaviour
             EndBattle();
             Debug.Log("End of Battle....you lose...");
         }
+        //If Player is not dead then it will switch back to their turn.
         else
         {
             CurrentState = BattleState.PLAYERTURN;
@@ -247,6 +247,7 @@ public class BattleSystem : MonoBehaviour
 
     public void OnFleeButton()
     {
+        //This will quickly end the battle by 'Skipping it'
         if (CurrentState != BattleState.PLAYERTURN)
         return;
         StartCoroutine(FLEE());

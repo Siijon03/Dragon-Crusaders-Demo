@@ -28,19 +28,4 @@ public class Enemy_Namer : MonoBehaviour
 
     }
 
-    //Setting up an IEmuerator.
-    IEnumerator Loading()
-    {
-        //This Will Hide the Panel.
-        HidePanel.SetActive(false);
-        yield return new WaitForSeconds(0f);
-    }
-
-    //Basic Button Logic.
-    public void OnOpeningButton()
-    {
-        StartCoroutine(Loading());
-        Debug.Log("You Clicked the Loading Button!");
-    }
-
 }
