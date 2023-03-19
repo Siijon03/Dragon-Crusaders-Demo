@@ -47,6 +47,8 @@ public class Player_Controller : MonoBehaviour
         catch (Exception e)
         {
             Debug.Log("Couldn't Find it :p");
+            Debug.Log(e);
+        
         }
     }
 

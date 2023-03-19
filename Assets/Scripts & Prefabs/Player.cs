@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
 
     //Basic Attack and Defense Stats.
     public int Player_AttackStat;
+    public int Player_EnergyAttackStat;
     public int Player_DefenseStat;
     
     //Player Health Values.
@@ -28,6 +29,7 @@ public class Player : MonoBehaviour
     public int EXPNeeded;
     public int Player_CurrentLevel;
 
+
     //This is for when the player takes damage 
     public bool TakeDamage(int TakeDamage)
     {
@@ -41,6 +43,7 @@ public class Player : MonoBehaviour
         else
             //Returns False if not
             return false;
+
     }
 
     //This Decreases Energy Based on Amount of Energy/Mana Used for an Attack.
@@ -49,7 +52,7 @@ public class Player : MonoBehaviour
         //Checks if Decreases the amount of energy used by the amount of energy used.
         Player_CurrentEnergy -= UseEnergy;
 
-        //Checks if Current Energy is equal of below Zer0.
+        //Checks if Current Energy is equal of below Zero.
         if (Player_CurrentEnergy <= 0)
             //If yes then the player cannot use an energy attack.
             return true;
@@ -58,15 +61,33 @@ public class Player : MonoBehaviour
             return false;
     }
 
+    public void GainEnergy(int IncreaseEnergy)
+    {
+        //Increases the Player's Current Energy.
+        Player_CurrentEnergy += IncreaseEnergy;
+        //Stops the Player from 'Over Charging.'
+        if (Player_CurrentEnergy > Player_MaxEnergy)
+            Player_CurrentEnergy = Player_MaxEnergy;
+
+    }
+
+    public void FocusBonus(float FocusBonus)
+    {
+        Player_EnergyAttackStat += (int)FocusBonus;
+    }
+
     //This will give the Player Experience Points Based on the amount of EXP an Enemy Contains.
     public bool GainExperiencePoints(int GainEXP)
     {
-
+        //This will give the Player more EXP Upon Winning.
         Player_ExperienceAmount += GainEXP;
 
+        //If the Current Experience Amount exceeds the amount needed.
         if (Player_ExperienceAmount >= EXPNeeded)
+            //Checks if the Requirements for Level Up are met. 
             return true;
         else
+            //Returns if the Requirements are not Met.
             return false;
             
     }
@@ -79,6 +100,13 @@ public class Player : MonoBehaviour
         //Stops the Player from 'Overhealing.'
         if (Player_CurrentHealth > Player_MaxHealth)
             Player_CurrentHealth = Player_MaxHealth;
+
+    }
+
+    public void PlayerDefenseBoost(int GuardBoost)
+    {
+        //Adds Extra Defense to the Player.
+        Player_DefenseStat += GuardBoost;
     }
     
 }

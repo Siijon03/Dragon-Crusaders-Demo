@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 
 //Setting up the BattleConditions to include possible outcomes. 
-public enum BattleState { START, PLAYERTURN, ATTACKING,ITEM,ACT,SELECTION,ENEMYTURN, WIN, LOSE, FLEE}
+public enum BattleState { START, PLAYERTURN, ATTACKING,ITEM,ACT,ENEMYTURN, WIN, LOSE, FLEE,NOENERGY}
 
 public class BattleSystem : MonoBehaviour
 {
@@ -43,21 +43,28 @@ public class BattleSystem : MonoBehaviour
         StartCoroutine(SetupBattle());
     }
 
+
     //Sets up the Battle and Gets the Enemyname.
     IEnumerator SetupBattle()
     {
-        //Clones the Prefab and Grid.
+        //Clones the Player's Prefab and Grid.
         GameObject PlayerTurn = Instantiate(PlayerPrefab, PlayerBattleStation);
         //Gets Components of the Player GameObject.
         PlayerUnit = PlayerTurn.GetComponent<Player>();
 
+        //This Will get the Player's Name.
         UIPlayerName.text = PlayerUnit.MC_Name;
+        //This Will get the Player's Level.
         UIPlayerLevel.text = "Lv." + PlayerUnit.PlayerLevel;
 
-        GameObject EnemyTurn = Instantiate(EnemyPrefab, EnemyBattleStation);  
+        //Clones the Enemy's Prefab and Grid.
+        GameObject EnemyTurn = Instantiate(EnemyPrefab, EnemyBattleStation);
+        //Gets Components of the Player GameObject.
         EnemyUnit = EnemyTurn.GetComponent<Enemy_Unit>();
 
+        //This Will get the Enemy's Name.
         UIDialogueText.text = EnemyUnit.EnemyName;
+        //This Will get the Enemy's Level.
         UIEnemyLevel.text = "Lv." + EnemyUnit.EnemyLevel;
 
         //Sets the HUDs for each side.
@@ -83,15 +90,17 @@ public class BattleSystem : MonoBehaviour
     //This indicates playerturn
     void Player_Turn()
     {
+        //Beginning Dialouge.
         UIDialogueText.text = EnemyUnit.EnemyName + " Has Appeared!";
         Debug.Log("Your Turn!");
+        //Switches to Player's Turn.
         CurrentState = BattleState.PLAYERTURN;
     }
 
     
 
     //Switches to the Player Attack
-    IEnumerator PlayerAttack()
+    IEnumerator PlayerPhysicalAttack()
     {
         //Checks to see if enemy has dropped to 0 HP.
         bool EnemyIsDead = EnemyUnit.TakeDamage(PlayerUnit.Player_AttackStat);
@@ -121,6 +130,137 @@ public class BattleSystem : MonoBehaviour
 
         
     }
+
+    //Switches to the Player Attack
+    IEnumerator PlayerPowerShotAttack()
+    {
+        //Checks to see if enemy has dropped to 0 HP.
+        bool EnemyIsDead = EnemyUnit.TakeDamage(PlayerUnit.Player_AttackStat);
+
+        float EnergyMultiplier = 1.5f;
+        int EnergyAttackBonus = (int)(EnergyMultiplier);
+
+        PlayerUnit.UseEnergy(15);
+        PlayerHUD.SetEnergy(PlayerUnit.Player_CurrentEnergy);
+
+        //Enemy Takes Damage and Calls the 'TakeDamage' Function from the Player Script and then Multiplying it by An Energy Stat.
+        EnemyUnit.TakeDamage(PlayerUnit.Player_EnergyAttackStat * EnergyAttackBonus);
+        //Updates the Enemy's HP on Their HUD by accessing the Slider
+        EnemyHUD.SetEnemyHP(EnemyUnit.Enemy_CurrentHealth);
+
+        yield return new WaitForSeconds(2f);
+
+        //If enemy is dead then the player wins and the battle ends. 
+        if (EnemyIsDead == true)
+        {
+            EnemyHUD.SetEnemyHP(EnemyUnit.Enemy_CurrentHealth = 0);
+            CurrentState = BattleState.WIN;
+            EndBattle();
+        }
+
+        //If the enemy is not defeated then it will be the enemy turn. 
+        else
+        {
+            CurrentState = BattleState.ENEMYTURN;
+            StartCoroutine(EnemyTurn());
+        }
+
+    }
+
+    IEnumerator PlayerFocus()
+    {
+
+        UIDialogueText.text = PlayerUnit.MC_Name + " Focuses!";
+
+        float EnergyMultiplier = 1.5f;
+        PlayerUnit.FocusBonus(1.5f);
+        PlayerUnit.FocusBonus(PlayerUnit.Player_EnergyAttackStat * (int)EnergyMultiplier);
+
+        PlayerUnit.UseEnergy(10);
+        PlayerHUD.SetEnergy(PlayerUnit.Player_CurrentEnergy);
+
+        yield return new WaitForSeconds(2f);
+
+        CurrentState = BattleState.ENEMYTURN;
+        StartCoroutine(EnemyTurn());
+
+    }
+
+    IEnumerator PlayerMultiShot()
+    {
+
+        //Checks to see if enemy has dropped to 0 HP.
+        bool EnemyIsDead = EnemyUnit.TakeDamage(PlayerUnit.Player_AttackStat);
+
+        float EnergyMultiplier = 1.5f;
+        float SecondShot = 2.5f;
+        int EnergyAttackBonus = (int)(EnergyMultiplier);
+
+
+        PlayerUnit.UseEnergy(30);
+        PlayerHUD.SetEnergy(PlayerUnit.Player_CurrentEnergy);
+
+        //Enemy Takes Damage and Calls the 'TakeDamage' Function from the Player Script and then Multiplying it by An Energy Stat.
+        EnemyUnit.TakeDamage(PlayerUnit.Player_EnergyAttackStat * (int)(EnergyAttackBonus + SecondShot));
+        //Updates the Enemy's HP on Their HUD by accessing the Slider
+        EnemyHUD.SetEnemyHP(EnemyUnit.Enemy_CurrentHealth);
+
+        yield return new WaitForSeconds(2f);
+
+        //If enemy is dead then the player wins and the battle ends. 
+        if (EnemyIsDead == true)
+        {
+            EnemyHUD.SetEnemyHP(EnemyUnit.Enemy_CurrentHealth = 0);
+            CurrentState = BattleState.WIN;
+            EndBattle();
+        }
+
+        //If the enemy is not defeated then it will be the enemy turn. 
+        else
+        {
+            CurrentState = BattleState.ENEMYTURN;
+            StartCoroutine(EnemyTurn());
+        }
+
+    }
+
+    IEnumerator PlayerDragonCannon()
+    {
+
+        //Checks to see if enemy has dropped to 0 HP.
+        bool EnemyIsDead = EnemyUnit.TakeDamage(PlayerUnit.Player_AttackStat);
+
+        float EnergyMultiplier = 1.5f;
+        int EnergyAttackBonus = (int)(EnergyMultiplier);
+
+        PlayerUnit.UseEnergy(65);
+        PlayerHUD.SetEnergy(PlayerUnit.Player_CurrentEnergy);
+
+        //Enemy Takes Damage and Calls the 'TakeDamage' Function from the Player Script and then Multiplying it by An Energy Stat.
+        EnemyUnit.TakeDamage(PlayerUnit.Player_EnergyAttackStat * (EnergyAttackBonus * 5));
+        //Updates the Enemy's HP on Their HUD by accessing the Slider
+        EnemyHUD.SetEnemyHP(EnemyUnit.Enemy_CurrentHealth);
+
+        yield return new WaitForSeconds(2f);
+
+        //If enemy is dead then the player wins and the battle ends. 
+        if (EnemyIsDead == true)
+        {
+            EnemyHUD.SetEnemyHP(EnemyUnit.Enemy_CurrentHealth = 0);
+            CurrentState = BattleState.WIN;
+            EndBattle();
+        }
+
+        //If the enemy is not defeated then it will be the enemy turn. 
+        else
+        {
+            CurrentState = BattleState.ENEMYTURN;
+            StartCoroutine(EnemyTurn());
+        }
+
+    }
+
+
 
     //This is the enemy's turn
     IEnumerator EnemyTurn()
@@ -207,16 +347,58 @@ public class BattleSystem : MonoBehaviour
         StartCoroutine(EnemyTurn());
     }
 
+    //Initiates A Flee Result.
     IEnumerator FLEE()
     {
         yield return new WaitForSeconds(2f);
         CurrentState = BattleState.FLEE;
     }
 
-    IEnumerator ACT()
+
+    IEnumerator Check()
     {
         yield return new WaitForSeconds(2f);
         Debug.Log("Act Successful!");
+
+        //Switches Back to the Enemy's Turn
+        CurrentState = BattleState.ENEMYTURN;
+        //Starts the Process
+        StartCoroutine(EnemyTurn());
+    }
+
+    IEnumerator Guard()
+    {
+        PlayerUnit.PlayerDefenseBoost(10);
+
+        PlayerUnit.PlayerDefenseBoost(PlayerUnit.Player_DefenseStat);
+
+        yield return new WaitForSeconds(2f);
+        Debug.Log("Guard Successful!");
+
+        CurrentState = BattleState.ENEMYTURN;
+        StartCoroutine(EnemyTurn());
+    }
+
+    IEnumerator EnergyCharge()
+    {
+        PlayerUnit.GainEnergy(20);
+
+        PlayerHUD.SetEnergy(PlayerUnit.Player_CurrentEnergy);
+
+        UIDialogueText.text = PlayerUnit.MC_Name + "Charges Up!";
+        yield return new WaitForSeconds(2f);
+
+        //Switches Back to the Enemy's Turn
+        CurrentState = BattleState.ENEMYTURN;
+        //Starts the Process
+        StartCoroutine(EnemyTurn());
+    }
+
+    IEnumerator SwitchCharacter()
+    {
+       
+        UIDialogueText.text = "You try to switch... But you have no Allies!";
+        yield return new WaitForSeconds(2f);
 
         //Switches Back to the Enemy's Turn
         CurrentState = BattleState.ENEMYTURN;
@@ -230,9 +412,51 @@ public class BattleSystem : MonoBehaviour
         //Runs attack if it's the player's turn.
         if (CurrentState != BattleState.PLAYERTURN)
         return;
-        StartCoroutine(PlayerAttack());
+        StartCoroutine(PlayerPhysicalAttack());
         UIDialogueText.text = PlayerUnit.MC_Name + " Attacks!";
         Debug.Log("Successful Attack!");
+    }
+
+    public void OnPowerShotButton()
+    {
+        //Runs attack if it's the player's turn.
+        if (CurrentState != BattleState.PLAYERTURN)
+            return;
+        StartCoroutine(PlayerPowerShotAttack());
+        UIDialogueText.text = PlayerUnit.MC_Name + " Shoots an Energy Blast!";
+        Debug.Log("Successful Attack!");
+    }
+
+    public void OnFocusButton()
+    {
+        //Runs attack if it's the player's turn.
+        if (CurrentState != BattleState.PLAYERTURN)
+            return;
+        StartCoroutine(PlayerFocus());
+        UIDialogueText.text = PlayerUnit.MC_Name + " Focuses!";
+        Debug.Log("Successful Attack!");
+    }
+
+    public void OnMulti_ShotButton()
+    {
+        //Runs attack if it's the player's turn.
+        if (CurrentState != BattleState.PLAYERTURN)
+            return;
+        StartCoroutine(PlayerMultiShot());
+        UIDialogueText.text = PlayerUnit.MC_Name + " Fires a Series of Blast!";
+        Debug.Log("Successful Attack!");
+
+    }
+
+    public void OnDragon_CannonButton()
+    {
+        //Runs attack if it's the player's turn.
+        if (CurrentState != BattleState.PLAYERTURN)
+            return;
+        StartCoroutine(PlayerDragonCannon());
+        UIDialogueText.text = PlayerUnit.MC_Name + " Fires a Devestating Blast!";
+        Debug.Log("Successful Attack!");
+
     }
 
     public void OnItemButton()
@@ -255,15 +479,46 @@ public class BattleSystem : MonoBehaviour
         Debug.Log("You escaped the battle!");
     }
 
-    public void OnActButton()
+    public void OnCheckButton()
     {
         //This Will Heal the Player when clicked. 
         if (CurrentState != BattleState.PLAYERTURN)
             return;
-        StartCoroutine(ACT());
+        StartCoroutine(Check());
+        //Shows the Player how much health the Enemy Has Left.
         UIDialogueText.text = EnemyUnit.EnemyName + " ... " + EnemyUnit.Enemy_CurrentHealth + " HP out of " + EnemyUnit.Enemy_MaxHealth + " HP Left!" ;
         Debug.Log("Successful Heal!");
     }
+
+    public void OnGuardButton()
+    {
+        //This Will let the Player guard when clicked. 
+        if (CurrentState != BattleState.PLAYERTURN)
+            return;
+        StartCoroutine(Guard());
+        UIDialogueText.text = PlayerUnit.MC_Name + " Guards!";
+        Debug.Log("Successful Heal!");
+    }
+
+    public void OnEnergyChargeButton()
+    {
+        //This Will Restore the Player's Energy when clicked. 
+        if (CurrentState != BattleState.PLAYERTURN)
+            return;
+        StartCoroutine(EnergyCharge());
+        UIDialogueText.text = PlayerUnit.MC_Name + " Charges Up!";
+        Debug.Log(PlayerUnit.MC_Name + "Restores Energy");
+    }
+
+    public void OnSwitchButton()
+    {
+        //This Will let the player swap when clicked. 
+        if (CurrentState != BattleState.PLAYERTURN)
+            return;
+        StartCoroutine(SwitchCharacter());
+        Debug.Log(PlayerUnit.MC_Name + "Attempts to Switch...");
+    }
+
 
 
 }

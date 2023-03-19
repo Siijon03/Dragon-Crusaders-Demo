@@ -15,7 +15,7 @@ public class Enemy_Position : MonoBehaviour
     //By making this public, we can send it to start and then pass it to public.
     public Vector3 Start_Position = new Vector3(0, 0, 0);
 
-    //This stores the player's co-ordinates 
+    //This stores the Enemy's co-ordinates 
     public Vector2 Enemy_Placement = new Vector2(0, 0);
 
     // Start is called before the first frame update
@@ -49,13 +49,6 @@ public class Enemy_Position : MonoBehaviour
         {
             Debug.Log("Enemy did not Spawn :(");
         }
-    }
-
-    // This is so the player can move around easily
-    //This transforms the position of the game objects
-    void Update()
-    {
-
     }
 
 }
