@@ -18,8 +18,8 @@ public class Grid_Manager : MonoBehaviour
 
     public GameObject _tilePrefab;
 
-    
 
+    //The Dictionary type steps away from arrays and lists by storing value pairs in each element, instead of single values.
     private Dictionary<Vector2, Tile> _tiles;
 
 

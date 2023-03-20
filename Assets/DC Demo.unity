@@ -516,7 +516,7 @@ MonoBehaviour:
   Player_MaxHealth: 92
   Player_MinHealth: 0
   Player_MaxEnergy: 100
-  Player_CurrentEnergy: 100
+  Player_CurrentEnergy: 15
   Player_MinEnergy: 0
   PlayerLevel: 8
   Player_ExperienceAmount: 20
@@ -892,11 +892,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7257690c405d49040bc12649b596cbf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  E_Grid_Row: 1
-  E_Grid_Columns: 1
-  E_Grid_Tile_Size: 1
-  _camera: {fileID: 1578956229}
-  _E_tilePrefab: {fileID: 594832402666577921, guid: 9abe5e1f296d6724382c7e750b148fa2, type: 3}
+  Enemy_Grid_Row: 1
+  Enemy_Grid_Columns: 1
+  Enemy_Grid_Tile_Size: 1
+  _camera: {fileID: 0}
+  _EnemytilePrefab: {fileID: 594832402666577921, guid: 9abe5e1f296d6724382c7e750b148fa2, type: 3}
 --- !u!4 &1558811645 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7815296760373386040, guid: 774307550c7497d489d2071ab458a4e3, type: 3}
@@ -1118,8 +1118,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   x: 0
   y: 0
-  Start_Position: {x: 0, y: 0, z: 0}
-  Enemy_Placement: {x: 0, y: 0}
+  Enemy_Start_Position: {x: 0, y: 0, z: 0}
+  Enemy_Grid_Position: {x: 0, y: 0}
+  EnemyPrefab: {fileID: 0}
 --- !u!1 &2061554155
 GameObject:
   m_ObjectHideFlags: 0
@@ -1289,7 +1290,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 105158366918458413, guid: f6c337c363c24204cbceb3e2fcf1b43c, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -370
+      value: -370.00006
       objectReference: {fileID: 0}
     - target: {fileID: 105158366918458413, guid: f6c337c363c24204cbceb3e2fcf1b43c, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1408,7 +1409,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4558037451091541916, guid: 7fac67e16d4dcce4787154a6a86c79cd, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnAttackButton
+      value: OnPunchButton
       objectReference: {fileID: 0}
     - target: {fileID: 4558037451091541916, guid: 7fac67e16d4dcce4787154a6a86c79cd, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -1429,6 +1430,34 @@ PrefabInstance:
     - target: {fileID: 4558037451181641458, guid: 7fac67e16d4dcce4787154a6a86c79cd, type: 3}
       propertyPath: m_CullTransparentMesh
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4558037451418650264, guid: 7fac67e16d4dcce4787154a6a86c79cd, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4558037451418650264, guid: 7fac67e16d4dcce4787154a6a86c79cd, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4558037451418650264, guid: 7fac67e16d4dcce4787154a6a86c79cd, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2061554156}
+    - target: {fileID: 4558037451418650264, guid: 7fac67e16d4dcce4787154a6a86c79cd, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4558037451418650264, guid: 7fac67e16d4dcce4787154a6a86c79cd, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnWorkUpButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 4558037451418650264, guid: 7fac67e16d4dcce4787154a6a86c79cd, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: BattleSystem, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4558037451418650264, guid: 7fac67e16d4dcce4787154a6a86c79cd, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 4558037451418650266, guid: 7fac67e16d4dcce4787154a6a86c79cd, type: 3}
       propertyPath: m_CullTransparentMesh
@@ -1614,6 +1643,34 @@ PrefabInstance:
       propertyPath: m_CullTransparentMesh
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4558037451869826086, guid: 7fac67e16d4dcce4787154a6a86c79cd, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4558037451869826086, guid: 7fac67e16d4dcce4787154a6a86c79cd, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4558037451869826086, guid: 7fac67e16d4dcce4787154a6a86c79cd, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2061554156}
+    - target: {fileID: 4558037451869826086, guid: 7fac67e16d4dcce4787154a6a86c79cd, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4558037451869826086, guid: 7fac67e16d4dcce4787154a6a86c79cd, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnRoundHouseKickButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 4558037451869826086, guid: 7fac67e16d4dcce4787154a6a86c79cd, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: BattleSystem, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4558037451869826086, guid: 7fac67e16d4dcce4787154a6a86c79cd, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 4558037451875161296, guid: 7fac67e16d4dcce4787154a6a86c79cd, type: 3}
       propertyPath: m_CullTransparentMesh
       value: 1
@@ -1625,6 +1682,34 @@ PrefabInstance:
     - target: {fileID: 4558037452046480117, guid: 7fac67e16d4dcce4787154a6a86c79cd, type: 3}
       propertyPath: m_Name
       value: 'Muti Rush Button '
+      objectReference: {fileID: 0}
+    - target: {fileID: 4558037452046480119, guid: 7fac67e16d4dcce4787154a6a86c79cd, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4558037452046480119, guid: 7fac67e16d4dcce4787154a6a86c79cd, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4558037452046480119, guid: 7fac67e16d4dcce4787154a6a86c79cd, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2061554156}
+    - target: {fileID: 4558037452046480119, guid: 7fac67e16d4dcce4787154a6a86c79cd, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4558037452046480119, guid: 7fac67e16d4dcce4787154a6a86c79cd, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnMultiRushButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 4558037452046480119, guid: 7fac67e16d4dcce4787154a6a86c79cd, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: BattleSystem, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4558037452046480119, guid: 7fac67e16d4dcce4787154a6a86c79cd, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 4558037452075025792, guid: 7fac67e16d4dcce4787154a6a86c79cd, type: 3}
       propertyPath: m_CullTransparentMesh
@@ -1819,7 +1904,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7815296760373386040, guid: 774307550c7497d489d2071ab458a4e3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7815296760373386040, guid: 774307550c7497d489d2071ab458a4e3, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1939,7 +2024,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5465317516312481548, guid: fb21ae468efe21e4b971a19697652e93, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -370
+      value: -370.00006
       objectReference: {fileID: 0}
     - target: {fileID: 5465317516312481548, guid: fb21ae468efe21e4b971a19697652e93, type: 3}
       propertyPath: m_AnchoredPosition.y

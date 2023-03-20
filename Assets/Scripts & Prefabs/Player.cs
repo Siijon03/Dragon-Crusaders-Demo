@@ -50,15 +50,18 @@ public class Player : MonoBehaviour
     public bool UseEnergy(int UseEnergy)
     {
         //Checks if Decreases the amount of energy used by the amount of energy used.
-        Player_CurrentEnergy -= UseEnergy;
-
-        //Checks if Current Energy is equal of below Zero.
-        if (Player_CurrentEnergy <= 0)
-            //If yes then the player cannot use an energy attack.
-            return true;
-        else
+        //Checks if Current Energy is equal or Higher Than Amount Used.
+        if (Player_CurrentEnergy >= UseEnergy)
+        {
             //If not, they can use another energy attack.
-            return false;
+            Player_CurrentEnergy -= UseEnergy;
+            return true;
+        }
+
+        Debug.Log("Attack Cannot be Done!");
+        //If yes then the player cannot use an energy attack.
+        return false;
+
     }
 
     public void GainEnergy(int IncreaseEnergy)
@@ -74,6 +77,10 @@ public class Player : MonoBehaviour
     public void FocusBonus(float FocusBonus)
     {
         Player_EnergyAttackStat += (int)FocusBonus;
+    }
+    public void WorkUpBonus(float WorkupBonus)
+    {
+        Player_AttackStat += (int)WorkupBonus;
     }
 
     //This will give the Player Experience Points Based on the amount of EXP an Enemy Contains.
