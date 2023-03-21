@@ -76,10 +76,12 @@ public class Player : MonoBehaviour
 
     public void FocusBonus(float FocusBonus)
     {
+        //Adds a Focus Bonus to the Energy Attack Stat.
         Player_EnergyAttackStat += (int)FocusBonus;
     }
     public void WorkUpBonus(float WorkupBonus)
     {
+        //Adds a Work Up Bonus to Player's Physical Attack Stat.
         Player_AttackStat += (int)WorkupBonus;
     }
 

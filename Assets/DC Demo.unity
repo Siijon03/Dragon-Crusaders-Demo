@@ -512,11 +512,11 @@ MonoBehaviour:
   Player_AttackStat: 40
   Player_EnergyAttackStat: 40
   Player_DefenseStat: 30
-  Player_CurrentHealth: 50
+  Player_CurrentHealth: 92
   Player_MaxHealth: 92
   Player_MinHealth: 0
   Player_MaxEnergy: 100
-  Player_CurrentEnergy: 15
+  Player_CurrentEnergy: 100
   Player_MinEnergy: 0
   PlayerLevel: 8
   Player_ExperienceAmount: 20
