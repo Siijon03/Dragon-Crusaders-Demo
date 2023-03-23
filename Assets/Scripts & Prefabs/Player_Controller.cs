@@ -61,7 +61,9 @@ public class Player_Controller : MonoBehaviour
             //This is so the player can move around without going too far up.
             if (!(Player_Position.y == 1))
             {
+                //Moves the Player Up
                 gameObject.transform.position += new Vector3(0f, +1f);
+                //Keeps them From Going OverBounds
                 Player_Position += new Vector2(0f, -1f);
             }
         }

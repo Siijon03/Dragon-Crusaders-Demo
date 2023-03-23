@@ -3,7 +3,11 @@ guid: f10a4b1db56cd7341be3eeaf9ba6d3ac
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - BeamPrefab: {fileID: 2745796512946397624, guid: 064a09378a11c7342a1a1139d11cb2d9, type: 3}
+  - LightningBoltPrefab: {fileID: 5906305824626635126, guid: 840e069f575bc6246b1aa40d44c6a7b0, type: 3}
+  - WhiplashPrefab: {fileID: 3814577015334137967, guid: 85405f9a5504d304db61f5f80ad1d9b3, type: 3}
+  - SpikeTrapPrefab: {fileID: 1646110421631877216, guid: 23e610433428b2d4eb893dd6ce49d669, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
