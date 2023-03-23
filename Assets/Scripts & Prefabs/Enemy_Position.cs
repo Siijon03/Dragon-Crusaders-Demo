@@ -23,7 +23,7 @@ public class Enemy_Position : MonoBehaviour
         try
         {
             //This accesses our grid manager script and Creates a new variable 
-            GameObject Enemy_GridObject = GameObject.Find("EnemyGridManager");
+            GameObject Enemy_GridObject = GameObject.Find("E.GridManager");
             //This accesses our grid manager script and calls upon those functions
             Enemy_GridManager EnemyGridScript = Enemy_GridObject.GetComponent<Enemy_GridManager>();
             //Gets the values of the rows and columns 

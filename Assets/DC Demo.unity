@@ -509,7 +509,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MC_Name: Reikov
-  Player_AttackStat: 40
+  Player_AttackStat: 28
   Player_EnergyAttackStat: 40
   Player_DefenseStat: 30
   Player_CurrentHealth: 92
@@ -522,6 +522,19 @@ MonoBehaviour:
   Player_ExperienceAmount: 20
   EXPNeeded: 100
   Player_CurrentLevel: 8
+--- !u!135 &633110835
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 633110827}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &686420292
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -577,6 +590,10 @@ PrefabInstance:
     - target: {fileID: 6011062687138696661, guid: 0d90d3de7c97609428813a8200a98f7f, type: 3}
       propertyPath: m_Name
       value: GridManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 6011062687138696661, guid: 0d90d3de7c97609428813a8200a98f7f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8036013832832364353, guid: 0d90d3de7c97609428813a8200a98f7f, type: 3}
       propertyPath: _camera
@@ -880,7 +897,12 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8285429585300933340, guid: 774307550c7497d489d2071ab458a4e3, type: 3}
   m_PrefabInstance: {fileID: 4884597966650167351}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1558811644
+--- !u!4 &1558811645 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7815296760373386040, guid: 774307550c7497d489d2071ab458a4e3, type: 3}
+  m_PrefabInstance: {fileID: 4884597966650167351}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1558811646
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -897,11 +919,6 @@ MonoBehaviour:
   Enemy_Grid_Tile_Size: 1
   _camera: {fileID: 0}
   _EnemytilePrefab: {fileID: 594832402666577921, guid: 9abe5e1f296d6724382c7e750b148fa2, type: 3}
---- !u!4 &1558811645 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7815296760373386040, guid: 774307550c7497d489d2071ab458a4e3, type: 3}
-  m_PrefabInstance: {fileID: 4884597966650167351}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1578956227
 GameObject:
   m_ObjectHideFlags: 0
@@ -1070,7 +1087,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5726346126482237720, guid: 501c68a4e7c5bce4e93cf76f5f84cd27, type: 3}
       propertyPath: Enemy_DefenseStat
-      value: 21
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 5726346126482237720, guid: 501c68a4e7c5bce4e93cf76f5f84cd27, type: 3}
       propertyPath: Enemy_CurrentHealth
