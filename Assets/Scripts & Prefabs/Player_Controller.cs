@@ -16,10 +16,24 @@ public class Player_Controller : MonoBehaviour
 
     //This stores the player's co-ordinates 
     public Vector2 Player_Position = new Vector2(0,0);
+    
+    public GameObject PlayerPrefab;
+    public GameObject EnemyPrefab;
+
+    public BattleHUD PlayerHUD;
+    public BattleHUD EnemyHUD;
+
+    public Player PlayerUnit;
+    public Enemy_Unit EnemyUnit;
+
+    
 
     // Start is called before the first frame update
     void Start()
     {
+        GameObject EnemyObject = Instantiate(EnemyPrefab);
+        EnemyUnit = EnemyObject.GetComponent<Enemy_Unit>();
+
         try
         {
             //This accesses our grid manager script and Creates a new variable 
@@ -97,5 +111,20 @@ public class Player_Controller : MonoBehaviour
                 Player_Position += new Vector2(-1f, 0f);
             }
         }
+    }
+
+
+    //This Updates the player's health meter on damage or restoration.
+    public void SetPlayerHP(int HealthUpdate)
+    {
+        PlayerHUD.PlayerHealth.value = HealthUpdate;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        //Player will take damage 
+        PlayerUnit.TakeDamage(EnemyUnit.Enemy_AttackStat);
+        //Updates Player HP.
+        PlayerHUD.SetPlayerHP(PlayerUnit.Player_CurrentHealth);
     }
 }

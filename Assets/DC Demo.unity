@@ -542,10 +542,13 @@ MonoBehaviour:
   AttackName: 
   AttackID: 0
   AttackDamageModifier: 0
+  Grid_Tile_Size: 1
   BeamPrefab: {fileID: 2745796512946397624, guid: 064a09378a11c7342a1a1139d11cb2d9, type: 3}
   LightningBoltPrefab: {fileID: 5906305824626635126, guid: 840e069f575bc6246b1aa40d44c6a7b0, type: 3}
   WhiplashPrefab: {fileID: 3814577015334137967, guid: 85405f9a5504d304db61f5f80ad1d9b3, type: 3}
   SpikeTrapPrefab: {fileID: 1646110421631877216, guid: 23e610433428b2d4eb893dd6ce49d669, type: 3}
+  PlayerPrefab: {fileID: 633110827}
+  PlayerHUD: {fileID: 850167454}
   Start_Position: {x: 0, y: 0, z: 0}
   Attack_Position: {x: 0, y: 0}
 --- !u!1 &633110827 stripped
@@ -579,19 +582,22 @@ MonoBehaviour:
   Player_ExperienceAmount: 20
   EXPNeeded: 100
   Player_CurrentLevel: 8
---- !u!135 &633110835
-SphereCollider:
+--- !u!58 &633110839
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 633110827}
+  m_Enabled: 1
+  m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &686420292
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -715,6 +721,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 7824883923179936052, guid: ebd3d4fd042285c4283693daa299c732, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 7824883923179936052, guid: ebd3d4fd042285c4283693daa299c732, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7824883923179936057, guid: ebd3d4fd042285c4283693daa299c732, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -759,6 +773,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7824883923179936059, guid: ebd3d4fd042285c4283693daa299c732, type: 3}
+      propertyPath: PlayerHUD
+      value: 
+      objectReference: {fileID: 850167454}
+    - target: {fileID: 7824883923179936059, guid: ebd3d4fd042285c4283693daa299c732, type: 3}
+      propertyPath: EnemyPrefab
+      value: 
+      objectReference: {fileID: 1808077032}
+    - target: {fileID: 7824883923179936059, guid: ebd3d4fd042285c4283693daa299c732, type: 3}
+      propertyPath: PlayerPrefab
+      value: 
+      objectReference: {fileID: 633110827}
     - target: {fileID: 7824883923179936059, guid: ebd3d4fd042285c4283693daa299c732, type: 3}
       propertyPath: Start_Position.x
       value: 0

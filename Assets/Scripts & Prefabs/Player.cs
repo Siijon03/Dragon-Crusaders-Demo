@@ -117,5 +117,5 @@ public class Player : MonoBehaviour
         //Adds Extra Defense to the Player.
         Player_DefenseStat += GuardBoost;
     }
-    
+
 }
