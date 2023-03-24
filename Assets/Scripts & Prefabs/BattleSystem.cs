@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System;
+using Unity.VisualScripting;
+using static Enemy_Attack_Manager;
+using Random = UnityEngine.Random;
 
 //Setting up the BattleConditions to include possible outcomes. 
 public enum BattleState { START, PLAYERTURN, ATTACKING,ITEM,ACT,ENEMYTURN, WIN, LOSE, FLEE,NOENERGY}
@@ -36,9 +39,14 @@ public class BattleSystem : MonoBehaviour
     //Public BattleState Adjustment.
     public BattleState CurrentState;
 
+    public Enemy_Attack_Manager RandomAttackSelection;
+
     //Sets the battle set to start and battles upon the SetBattle Function.
     void Start()
     {
+        GameObject RandomAttackSelection = GameObject.Find("Attack Manager");
+        Enemy_Attack_Manager AttackSelection = RandomAttackSelection.GetComponent<Enemy_Attack_Manager>();
+
         //Makes the Inital State Start.
         CurrentState = BattleState.START;
         StartCoroutine(SetupBattle());
@@ -508,6 +516,40 @@ public class BattleSystem : MonoBehaviour
         UIDialogueText.text = EnemyUnit.EnemyName + " Attacks!";
         Debug.Log("Enemy Attacks");
 
+        AttackSelection AttackID = (AttackSelection)Random.Range(0,3);
+
+        if (AttackSelection.SinisterBeam == AttackID)
+        {
+            UIDialogueText.text = EnemyUnit.EnemyName + " Cast Sinister Beam!";
+            yield return new WaitForSeconds(2f);
+            StartCoroutine((RandomAttackSelection.GetComponent<Enemy_Attack_Manager>().SinisterBeamAttack()));
+        }
+        else if (AttackSelection.LightningBolt == AttackID)
+        {
+            UIDialogueText.text = EnemyUnit.EnemyName + " Cast Lightning Bolt!";
+            yield return new WaitForSeconds(2f);
+            StartCoroutine((RandomAttackSelection.GetComponent<Enemy_Attack_Manager>().LightningBoltAttack()));
+        }
+        else if (AttackSelection.Whiplash == AttackID)
+        {
+            UIDialogueText.text = EnemyUnit.EnemyName + " Cast Whiplash!";
+            yield return new WaitForSeconds(2f);
+            StartCoroutine((RandomAttackSelection.GetComponent<Enemy_Attack_Manager>().Whiplash()));
+
+        }
+        else if (AttackSelection.SpikeTrap == AttackID)
+        {
+            UIDialogueText.text = EnemyUnit.EnemyName + " Cast Spike Trap!";
+            yield return new WaitForSeconds(2f);
+            StartCoroutine((RandomAttackSelection.GetComponent<Enemy_Attack_Manager>().SpikeTrap()));
+        }
+
+
+
+        yield return new WaitForSeconds(5f);
+
+
+        /*
         //Player will take damage 
         PlayerUnit.TakeDamage(EnemyUnit.Enemy_AttackStat);
 
@@ -515,9 +557,11 @@ public class BattleSystem : MonoBehaviour
 
         //Updates Player HP.
         PlayerHUD.SetPlayerHP(PlayerUnit.Player_CurrentHealth);
-       
+       */
+
         //Checks to see if player has dropped to 0 HP.
         bool PlayerisDead = PlayerUnit.TakeDamage(EnemyUnit.Enemy_AttackStat);
+
 
         //Checks if player is defeated.
         if (PlayerisDead == true)
