@@ -516,7 +516,10 @@ public class BattleSystem : MonoBehaviour
         UIDialogueText.text = EnemyUnit.EnemyName + " Attacks!";
         Debug.Log("Enemy Attacks");
 
-        AttackSelection AttackID = (AttackSelection)Random.Range(0,3);
+        AttackSelection AttackID = (AttackSelection)Random.Range(0,4);
+
+        //Testing for a Specific Attack.
+        //AttackSelection AttackID = (AttackSelection)3;
 
         if (AttackSelection.SinisterBeam == AttackID)
         {
@@ -606,6 +609,7 @@ public class BattleSystem : MonoBehaviour
             UIDialogueText.text = PlayerUnit.MC_Name + " Flees...";
             //Loops the function as to not load another state.
             Debug.Log("You Escaped...");
+            Application.Quit();
         }
     }
 

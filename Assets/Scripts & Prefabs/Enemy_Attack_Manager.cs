@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Drawing;
+using System.Runtime.CompilerServices;
 using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -111,8 +112,11 @@ public class Enemy_Attack_Manager : MonoBehaviour
 
     }
 
+
     public IEnumerator SinisterBeamAttack()
     {
+
+      
         AttackName = "Sinister Beam";
         AttackID = 1;
         AttackDamageModifier = 1.5f;
@@ -131,8 +135,10 @@ public class Enemy_Attack_Manager : MonoBehaviour
          //Moves the Attack up.
          BeamAttack.transform.position += new Vector3(0, -1f);
          //Keeps it from going OverBounds.
-         Attack_Position += new Vector2(+0f, 0f);
-         BeamAttack.transform.position = new Vector2(BeamAttack.transform.position.x + (posX - 6.5f), gameObject.transform.position.y + posY + 0);
+         Attack_Position -= new Vector2(+0f, 0f);
+        //BeamAttack.transform.position = new Vector2(BeamAttack.transform.position.x + (posX - 6.5f), gameObject.transform.position.y + posY + 0);
+        BeamAttack.transform.position = new Vector2(BeamAttack.transform.position.x - 6.5f , gameObject.transform.position.y + posY);
+
 
         yield return new WaitForSecondsRealtime(5f);
 
@@ -141,7 +147,9 @@ public class Enemy_Attack_Manager : MonoBehaviour
         gameObjects = GameObject.FindGameObjectsWithTag("EnemyAttack");
         foreach (GameObject EnemyAttack in gameObjects)
         {
-            Destroy(EnemyAttack,10);
+            Destroy(EnemyAttack, 2.5f);
+            Attack_Position = new Vector3 (0, 0, 0);
+
         }
         
         
@@ -191,16 +199,21 @@ public class Enemy_Attack_Manager : MonoBehaviour
         yield return new WaitForSecondsRealtime(1f);
         //gameObject.SetActive(true);
 
-        for (int x = 0; x < 3; x++)
+        for (int x = 0; x < 1; x++)
         {
-            for (int y = 0; y < 1; y++)
+            for (int y = 0; y < 3; y++)
             {
                 GameObject LightningBolt = (GameObject)Instantiate(LightningBoltPrefab, transform);
 
-                LightningBolt.transform.position += new Vector3(+0.54f, +2f);
+                /*LightningBolt.transform.position = new Vector3(+0.54f, +2f);
                 //Keeps it from going OverBounds.
-                Attack_Position += new Vector2(-0.54f, -2f);
-                LightningBolt.transform.position = new Vector2(LightningBolt.transform.position.x + (posX + 3), gameObject.transform.position.y + (posY - RandBoltY + 1));
+                Attack_Position -= new Vector2(-0.54f, -2f);*/
+                Attack_Position = LightningBolt.transform.position;
+                //Keeps it from going OverBounds.
+                Attack_Position += new Vector2(+0.54f,0);
+                //LightningBolt.transform.position = new Vector2(LightningBolt.transform.position.x + (posY + RandBoltX + 3), gameObject.transform.position.y + (posX - RandBoltY + 1));
+                LightningBolt.transform.position = new Vector2(LightningBolt.transform.position.x + 3.54f, gameObject.transform.position.y + 1);
+
             }
         }
 
@@ -211,9 +224,10 @@ public class Enemy_Attack_Manager : MonoBehaviour
         gameObjects = GameObject.FindGameObjectsWithTag("EnemyAttack");
         foreach (GameObject EnemyAttack in gameObjects)
         {
-            Destroy(EnemyAttack, 5);
+            Destroy(EnemyAttack, 2.5f);
+            Attack_Position = new Vector3(0, 0, 0);
         }
-  
+
     }
 
     public IEnumerator Whiplash()
@@ -228,15 +242,20 @@ public class Enemy_Attack_Manager : MonoBehaviour
         yield return new WaitForSecondsRealtime(1f);
         //gameObject.SetActive(true);
 
-        for (int y = 0; y < 3; y++) 
+        for (int y = 0; y < 3; y++)
         {
             GameObject WhipLashAttack = (GameObject)Instantiate(WhiplashPrefab, transform);
             WhipLashAttack.transform.position = new Vector2(WhipLashAttack.transform.position.x + (new_x - 1), WhipLashAttack.transform.position.y + ((new_y * -1) + 1));
 
-            WhipLashAttack.transform.position += new Vector3(+4.04f, 3f);
+            /*WhipLashAttack.transform.position += new Vector3(+4.04f, 3f);
             //Keeps it from going OverBounds.
-            Attack_Position += new Vector2(-4.04f, -3f);
-            WhipLashAttack.transform.position = new Vector2(WhipLashAttack.transform.position.x - (posY + 12), WhipLashAttack.transform.position.y - (posX + y + 2.510846f));
+            Attack_Position -= new Vector2(-4.04f, -3f);*/
+            WhipLashAttack.transform.position += new Vector3(0f, 0f);
+            //Keeps it from going OverBounds.
+            Attack_Position -= new Vector2(-3.04f, 0f);
+            //WhipLashAttack.transform.position = new Vector2(WhipLashAttack.transform.position.x - (posY + 12), WhipLashAttack.transform.position.y - (posX + y + 2.510846f));
+            WhipLashAttack.transform.position = new Vector2(WhipLashAttack.transform.position.x - 7.96f, WhipLashAttack.transform.position.y - (posX + y + -0.5108457f));
+
 
         }
 
@@ -246,8 +265,9 @@ public class Enemy_Attack_Manager : MonoBehaviour
 
         gameObjects = GameObject.FindGameObjectsWithTag("EnemyAttack");
         foreach (GameObject EnemyAttack in gameObjects)
-        {
-            Destroy(EnemyAttack, 5);
+        {   
+            Destroy(EnemyAttack, 2.5f);
+            Attack_Position = new Vector3(0, 0, 0);
         }
     }
 
@@ -270,7 +290,7 @@ public class Enemy_Attack_Manager : MonoBehaviour
 
             SpikeTrapAttack.transform.position += new Vector3(+4.04f, 3f);
             //Keeps it from going OverBounds.
-            Attack_Position += new Vector2(-4.04f, -3f);
+            Attack_Position = new Vector2(-4.04f, -3f);
             SpikeTrapAttack.transform.position = new Vector2(SpikeTrapAttack.transform.position.x - (posY + x + 19.040001f), SpikeTrapAttack.transform.position.y - (posX + y + 4));        
         }
 
@@ -281,7 +301,8 @@ public class Enemy_Attack_Manager : MonoBehaviour
         gameObjects = GameObject.FindGameObjectsWithTag("EnemyAttack");
         foreach (GameObject EnemyAttack in gameObjects)
         {
-            Destroy(EnemyAttack, 5);
+            Destroy(EnemyAttack, 2.5f);
+            Attack_Position = new Vector3(0, 0, 0);
         }
     }
 
